@@ -1,16 +1,25 @@
 <script>
+import AppHeader from "@/components/AppHeader.vue";
+import { RouterView } from "vue-router";
 export default {
-}
+  components: {
+    AppHeader,
+    RouterView
+  },
+};
 </script>
-npm run dev
-
 <template>
-  <h1>Hello, Vue.js!</h1>
+  <div id="app">
+    <AppHeader />
+    <div class="container mt-3">
+      <RouterView />
+    </div>
+  </div>
 </template>
-
-<style scoped>
+<style>
 .page {
   max-width: 400px;
   margin: auto;
 }
 </style>
+
