@@ -52,6 +52,7 @@ export default {
         ContactCard,
         InputSearch,
         ContactList,
+
     },
     data() {
         return {
@@ -113,7 +114,9 @@ export default {
             }
         },
         goToAddContact() {
-            this.$router.push({ name: "contact.add" });
+            this.$router.push({
+                name: "contact.add",
+            });
         },
     },
     mounted() {
