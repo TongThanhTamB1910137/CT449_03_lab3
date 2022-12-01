@@ -1,30 +1,31 @@
 <template>
-    <div v-if="contact" class="page">
-        <h4>Hiệu chỉnh Liên hệ</h4>
-        <ContactForm :contact="contact" @submit:contact="updateContact" @delete:contact="deleteContact" />
+    <div v-if="pokemon" class="page">
+        <img src="/pokemon.png" class="img">
+        <PokemonForm :pokemon="pokemon" @submit:pokemon="updatePokemon" @delete:pokemon="deletePokemon" />
         <p>{{ message }}</p>
     </div>
 </template>
+
 <script>
-import ContactForm from "@/components/ContactForm.vue";
-import ContactService from "@/services/contact.service";
+import PokemonForm from "@/components/PokemonForm.vue";
+import PokemonService from "@/services/pokemon.service";
 export default {
     components: {
-        ContactForm,
+        PokemonForm,
     },
     props: {
         id: { type: String, required: true },
     },
     data() {
         return {
-            contact: null,
+            pokemon: null,
             message: "",
         };
     },
     methods: {
-        async getContact(id) {
+        async getPokemon(id) {
             try {
-                this.contact = await ContactService.get(id);
+                this.pokemon = await PokemonService.get(id);
             } catch (error) {
                 console.log(error);
                 // Chuyển sang trang NotFound đồng thời giữ cho URL không đổi
@@ -38,19 +39,19 @@ export default {
                 });
             }
         },
-        async updateContact(data) {
+        async updatePokemon(data) {
             try {
-                await ContactService.update(this.contact._id, data);
-                this.message = "Liên hệ được cập nhật thành công.";
+                await PokemonService.update(this.pokemon._id, data);
+                this.message = "Pokemon được cập nhật thành công.";
             } catch (error) {
                 console.log(error);
             }
         },
-        async deleteContact() {
-            if (confirm("Bạn muốn xóa Liên hệ này?")) {
+        async deletePokemon() {
+            if (confirm("Bạn muốn xóa Pokemon này không?")) {
                 try {
-                    await ContactService.delete(this.contact._id);
-                    this.$router.push({ name: "contactbook" });
+                    await PokemonService.delete(this.pokemon._id);
+                    this.$router.push({ name: "pokemon" });
                 } catch (error) {
                     console.log(error);
                 }
@@ -58,8 +59,17 @@ export default {
         },
     },
     created() {
-        this.getContact(this.id);
+        this.getPokemon(this.id);
         this.message = "";
     },
 };
 </script>
+<style>
+.img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+}
+</style>

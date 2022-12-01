@@ -1,10 +1,13 @@
 import createApiClient from "./api.service";
-class ContactService {
-    constructor(baseUrl = "/api/contacts") {
-        this.api = createApiClient(baseUrl);
+class PokemonService {
+    constructor() {
+        this.api = createApiClient("/api/pokemon");
     }
     async getAll() {
         return (await this.api.get("/")).data;
+    }
+    async getAllType() {
+        return (await this.api.get("/typepokemon")).data;
     }
     async create(data) {
         return (await this.api.post("/", data)).data;
@@ -22,4 +25,4 @@ class ContactService {
         return (await this.api.delete(`/${id}`)).data;
     }
 }
-export default new ContactService();
+export default new PokemonService();

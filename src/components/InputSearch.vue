@@ -8,6 +8,9 @@ export default {
         updateModelValue(e) {
             this.$emit("update:modelValue", e.target.value);
         },
+        changeSeleted(e) {
+            this.$emit("change-selected", e.target.value);
+        },
         submit() {
             this.$emit("submit");
         },
@@ -15,13 +18,21 @@ export default {
 };
 </script>
 <template>
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="Nhập thông tin cần tìm" :value="modelValue"
-            @input="updateModelValue" @keyup.enter="submit" />
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" @click="submit">
-                <i class="fas fa-search"></i> Tìm kiếm
-            </button>
+    <div class="row">
+        <div class="col col-md-10">
+            <div class="col-lg-14">
+                <input type="search" class="form-control " placeholder="Nhập tên pokemon" :value="modelValue"
+                    @input="updateModelValue" @keyup.enter="submit" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <select class="form-select" aria-label="Default select example" name="type" @change="changeSeleted">
+                <option selected><i>Tìm theo hệ</i></option>
+                <option value="grass">Grass</option>
+                <option value="posion">Posion</option>
+                <option value="water">Water</option>
+                <option value="fire">Fire</option>
+            </select>
         </div>
     </div>
 </template>

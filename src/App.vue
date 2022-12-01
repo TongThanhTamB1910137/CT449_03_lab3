@@ -11,7 +11,7 @@ export default {
 <template>
   <div id="app">
     <AppHeader />
-    <div class="container mt-3">
+    <div class="container">
       <RouterView />
     </div>
   </div>
